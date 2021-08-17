@@ -1,0 +1,37 @@
+name: 'Terraform Plan Actions'
+on:
+  push:
+    branches:
+      - 'master'
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_DEFAULT_REGION: us-east-1
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Set up Terraform'
+        uses: hashicorp/setup-terraform@v1
+
+      - name: 'Terraform Init'
+        id: init
+        run: terraform init
+
+      - name: 'Terraform Plan'
+        id: plan
+        # if: github.event_name == 'push'
+        run: terraform plan
+        continue-on-error: true
+
+      - name: 'Terraform Apply'
+        id: apply
+        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve
+
+      # - name: 'Terraform Destroy'
+      #   id: destroy
+      #   run: terraform destroy -auto-approve
