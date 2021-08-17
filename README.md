@@ -1,7 +1,10 @@
 # Terraform - Provision an EKS Cluster
 
-This repo is a companion repo to the [Provision an EKS Cluster learn guide](https://learn.hashicorp.com/terraform/kubernetes/provision-eks-cluster), containing
-Terraform configuration files to provision an EKS cluster on AWS.
+# Create a secrets in Environments on the Github project
+Settings >> Environments >> create AWS_ACCESS_KEY and AWS_SECRET_KEY
+
+# Create a secrets in Environments on the Github project
+Setting >> secrets >> New repository secret >> create AWS_ACCESS_KEY and AWS_SECRET_KEY
 
 
 Outputs:
